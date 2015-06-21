@@ -13,13 +13,14 @@ public partial class Unit : MonoBehaviour
 
     protected void Start()
     {
-
+        initAni();
     }
 
     protected void Update()
     {
         updateBT();
         updateHP();
+        updateAni();
     }
 }
 

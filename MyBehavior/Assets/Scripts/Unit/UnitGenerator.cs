@@ -16,7 +16,7 @@ public class UnitGenerator
 
     public static Unit genUnit<T>(UnitAttr attr) where T : Unit
     {
-        GameObject go = GameObject.Instantiate(Resources.Load("Cube")) as GameObject;
+        GameObject go = GameObject.Instantiate(Resources.Load("Player")) as GameObject;
         go.name = "unit";
         Unit unit = go.AddComponent<T>();
         unit.finalAttr = attr;

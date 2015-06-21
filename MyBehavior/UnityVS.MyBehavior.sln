@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.MyBehavior.CSharp", "UnityVS.MyBehavior.CSharp.csproj", "{BC6731DF-CC1A-5FAD-B324-53F5F27C912C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.MyBehavior.CSharp.Editor", "UnityVS.MyBehavior.CSharp.Editor.csproj", "{5D5BD184-AB91-A47F-D49D-890C33D160CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{BC6731DF-CC1A-5FAD-B324-53F5F27C912C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC6731DF-CC1A-5FAD-B324-53F5F27C912C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC6731DF-CC1A-5FAD-B324-53F5F27C912C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D5BD184-AB91-A47F-D49D-890C33D160CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D5BD184-AB91-A47F-D49D-890C33D160CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D5BD184-AB91-A47F-D49D-890C33D160CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D5BD184-AB91-A47F-D49D-890C33D160CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

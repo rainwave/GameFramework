@@ -8,8 +8,10 @@ public partial class Unit : MonoBehaviour
     {
         if (target == null)
             return;
+
         if (target.finalAttr.curHP > 0)
         {
+            changeMotion("hit");
             target.finalAttr.curHP -= (this.finalAttr.atk - target.finalAttr.def);
             Debug.Log("hit target ,curhp == " + target.finalAttr.curHP);
         }
