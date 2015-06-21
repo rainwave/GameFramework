@@ -18,7 +18,9 @@ namespace BT
 		protected BTPrecondition m_precondition;
 
         // 是否被激活，激活时为当前选中节点,可以执行tick循环了.
-        public bool m_active = false;
+        public bool m_actived = false;
+
+        public Blackboard m_blackboard;
 
 		protected float m_interval = 0.1f;
 		protected float m_previousTime = 0;
@@ -38,7 +40,26 @@ namespace BT
 			m_precondition = precondition;
 		}
 
-		public bool Evaluate()
+        // 不断传递黑板到子节点，使得整棵树共享一个黑板，获取、存储数据
+        // 注意，激活要在这科树构建完成之后
+        public void active(Blackboard blackboard)
+        {
+            if (m_actived || blackboard == null)
+                return;
+
+            if (m_precondition != null)
+                m_precondition.active(blackboard);
+
+            for (int i = 0, len = m_children.Count; i < len; i++)
+            {
+                m_children[i].active(blackboard);
+            }
+
+            this.m_blackboard = blackboard;
+            m_actived = true;
+        }
+
+        public bool Evaluate()
 		{
 			bool coolDownOK = checkTimer ();
 

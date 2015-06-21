@@ -11,9 +11,9 @@ namespace BT
         int count = 15;
         Unit m_srcUnit = null;
 
-        public ActionHitNear(Unit srcUnit)
+        public ActionHitNear()
         {
-            m_srcUnit = srcUnit;
+            
         }
 
         protected override bool DoEvaluate()
@@ -26,6 +26,7 @@ namespace BT
 
         protected override void Enter()
         {
+            m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
             timer = new Timer();
         }
 

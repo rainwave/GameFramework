@@ -2,21 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BT;
+using WTH;
 
 public class UnitPlayer : Unit
 {
-    protected void Start()
+    protected override void initAI()
     {
-        base.Start();
-
-        BTSequence sequece = new BTSequence();
-        BTAction sayHello = new ActionSayHello();
-        BTAction run = new ActionRun(this);
-        BTAction hitNear = new ActionHitNear(this);
-        sequece.addChild(sayHello);
-        sequece.addChild(run);
-        sequece.addChild(hitNear);
-        this.addBTChild(sequece);
+        createAI(new AIMoveAttack(this));
     }
 }
 

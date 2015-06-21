@@ -10,17 +10,9 @@ namespace BT
         Unit m_srcUnit = null;
         Vector3 m_targetPos = Vector3.zero;
 
-        public ActionRun(Unit srcUnit)
+        public ActionRun()
         {
-            m_srcUnit = srcUnit;
-            Unit nearUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
-            m_targetPos = nearUnit.m_cacheTransform.localPosition;
-        }
-
-        public ActionRun(Unit srcUnit, Vector3 targetPos)
-        {
-            m_srcUnit = srcUnit;
-            m_targetPos = targetPos;
+            
         }
 
         protected override bool DoEvaluate()
@@ -30,7 +22,10 @@ namespace BT
 
         protected override void Enter()
         {
-           
+            m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
+            Unit nearUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
+            if (nearUnit != null)
+                m_targetPos = nearUnit.m_cacheTransform.localPosition;
         }
 
         protected override BTResult Excute()

@@ -13,6 +13,7 @@ public partial class Unit : MonoBehaviour
 
     protected void Start()
     {
+        initAI();
         initAni();
     }
 
