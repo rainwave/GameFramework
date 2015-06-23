@@ -16,6 +16,7 @@ public partial class Unit : MonoBehaviour
 
     public void updateHP()
     {
+        Debug.Log(name + finalAttr.curHP);
         if (this.renderer != null)
         {
             Material mat = this.renderer.material;

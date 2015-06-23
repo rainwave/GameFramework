@@ -7,10 +7,9 @@ namespace WTH
 {
     public class AIMoveAttack : AI
     {
-        Unit m_srcUnit;
         public AIMoveAttack(Unit srcUnit) : base(srcUnit)
         {
-            m_srcUnit = srcUnit;
+
         }
 
         public override void enter()
@@ -21,7 +20,7 @@ namespace WTH
             BTAction sayHello = new ActionSayHello();
             BTAction run = new ActionRun();
             BTAction hitNear = new ActionHitNear();
-            sequece.addChild(sayHello);
+            //sequece.addChild(sayHello);
             sequece.addChild(run);
             sequece.addChild(hitNear);
             this.addBTChild(sequece);

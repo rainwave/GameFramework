@@ -16,7 +16,7 @@ public partial class Unit : MonoBehaviour
     // 此处简单起见，定死
     protected List<AniInfo> m_aniInfoes = new List<AniInfo>();
 
-    protected Animator m_animator;
+    public Animator m_animator;
 
     protected AniInfo m_curAniInfo;
 
@@ -38,7 +38,7 @@ public partial class Unit : MonoBehaviour
         m_animator = this.GetComponent<Animator>();
     }
 
-    protected void changeMotion(string animName)
+    public void changeMotion(string animName)
     {
         if (m_animator == null || string.IsNullOrEmpty(animName))
             return;

@@ -15,6 +15,7 @@ public partial class Unit : MonoBehaviour
     {
         initAI();
         initAni();
+        initSkill();
     }
 
     protected void Update()
@@ -22,6 +23,7 @@ public partial class Unit : MonoBehaviour
         updateBT();
         updateHP();
         updateAni();
+        updateSkill();
     }
 }
 

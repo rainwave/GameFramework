@@ -70,7 +70,7 @@ namespace BT
                 }
             }
 
-            Debug.Log(result);
+//            Debug.Log(result);
             return result;
         }
     }

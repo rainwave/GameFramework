@@ -22,5 +22,10 @@ public partial class Unit : MonoBehaviour
 
     }
 
+    public void hitRound()
+    { 
+        
+    }
+
 }
 

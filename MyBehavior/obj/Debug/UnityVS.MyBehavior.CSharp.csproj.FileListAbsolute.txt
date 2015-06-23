@@ -7,3 +7,12 @@ D:\UnityProject\MyBehavior\Temp\UnityVS_bin\Debug\UnityEditor.xml
 D:\UnityProject\MyBehavior\obj\Debug\UnityVS.MyBehavior.CSharp.csprojResolveAssemblyReference.cache
 D:\UnityProject\MyBehavior\obj\Debug\Assembly-CSharp.dll
 D:\UnityProject\MyBehavior\obj\Debug\Assembly-CSharp.pdb
+D:\UnityProject\GitTest\MyBehavior\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+D:\UnityProject\GitTest\MyBehavior\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+D:\UnityProject\GitTest\MyBehavior\Temp\UnityVS_bin\Debug\UnityEditor.dll
+D:\UnityProject\GitTest\MyBehavior\Temp\UnityVS_bin\Debug\UnityEngine.dll
+D:\UnityProject\GitTest\MyBehavior\Temp\UnityVS_bin\Debug\UnityEngine.xml
+D:\UnityProject\GitTest\MyBehavior\Temp\UnityVS_bin\Debug\UnityEditor.xml
+D:\UnityProject\GitTest\MyBehavior\obj\Debug\UnityVS.MyBehavior.CSharp.csprojResolveAssemblyReference.cache
+D:\UnityProject\GitTest\MyBehavior\obj\Debug\Assembly-CSharp.dll
+D:\UnityProject\GitTest\MyBehavior\obj\Debug\Assembly-CSharp.pdb

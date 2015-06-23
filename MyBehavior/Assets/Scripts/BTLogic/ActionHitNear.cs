@@ -38,8 +38,7 @@ namespace BT
                 count--;
                 if (m_srcUnit != null)
                 {
-                    Unit targetUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
-                    m_srcUnit.hit(targetUnit);
+                    m_srcUnit.useSkill(SkillIndex.Normal);
                 }
             }
 
