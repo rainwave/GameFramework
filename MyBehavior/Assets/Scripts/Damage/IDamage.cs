@@ -13,7 +13,7 @@ namespace WTH
 
     public class DamageResult
     {
-        public Unit targetUnit;
+        public Unit damgeUnit;
         public int damage;
         public DamageType damageType;
     }
@@ -50,6 +50,9 @@ namespace WTH
         public delegate int CalDamageHPFun(Unit srcUnit, Unit targetUnit);
         public CalDamageHPFun calDamageHPFun;
 
+        public delegate void CallbackDamaged(Unit srcUnit, Unit targetUnit);
+        public CallbackDamaged callbackDamaged;
+
         public IDamage()
         {
             DamageMng.Instance.addDamage(this);
@@ -58,6 +61,7 @@ namespace WTH
 
         public virtual DamageResult generateDamageResult()
         {
+           
             return null;
         }
 

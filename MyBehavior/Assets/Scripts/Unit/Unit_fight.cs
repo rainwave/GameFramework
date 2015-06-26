@@ -12,7 +12,7 @@ public partial class Unit : MonoBehaviour
         if (target.finalAttr.curHP > 0)
         {
             changeMotion("hit");
-            target.finalAttr.curHP -= (this.finalAttr.atk - target.finalAttr.def);
+            target.finalAttr.curHP -= (this.finalAttr.phyDam - target.finalAttr.phyDef);
             Debug.Log("hit target ,curhp == " + target.finalAttr.curHP);
         }
         else

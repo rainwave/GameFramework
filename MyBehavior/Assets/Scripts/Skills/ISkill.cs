@@ -9,8 +9,12 @@ namespace WTH
         public string m_motionName;                     // 动作
         public string m_effect;
         public Unit m_srcUnit;
-        public float m_genDamageEveryNorTime = 0.8f;      // 隔多少正交化时间产生一次IDamage
-        public float m_endDamageNorTime = 0.9f;
+        public float m_genDamageTimeN = 0.2f;           // 开始产生伤害的正交化时间(有些技能需要吟唱)
+        public float m_genDamageEveryTimeN = 0.8f;      // 隔多少正交化时间产生一次IDamage
+        public float m_endDamageTimeN = 0.9f;
+
+        public delegate void CallbackDamaged(Unit srcUnit, Unit targetUnit);
+        public CallbackDamaged callbackDamaged;
 
         // ==============================================================
         private float nextGenDamageNorTime = -1;
@@ -38,18 +42,21 @@ namespace WTH
                 return true;
             // TODO 技能真实发动了才产生效果
 
+            if (aniState.normalizedTime < m_genDamageTimeN)
+                return false;
+
             // 产生IDamage球
-            if(m_genDamageEveryNorTime > 0)
+            if(m_genDamageEveryTimeN > 0)
             {
                 if(nextGenDamageNorTime < 0)
-                    nextGenDamageNorTime = m_genDamageEveryNorTime;
+                    nextGenDamageNorTime = m_genDamageEveryTimeN;
                 if (aniState.normalizedTime > nextGenDamageNorTime)
                 {
                     genDamage();
-                    nextGenDamageNorTime += m_genDamageEveryNorTime;
+                    nextGenDamageNorTime += m_genDamageEveryTimeN;
                 }
 
-                if (nextGenDamageNorTime > m_endDamageNorTime || nextGenDamageNorTime > 1.0f)
+                if (nextGenDamageNorTime > m_endDamageTimeN || nextGenDamageNorTime > 1.0f)
                     return true;
                 else
                     return false;
@@ -69,13 +76,20 @@ namespace WTH
         {
             IDamage damage = new IDamage();
             damage.calDamageHPFun = calDamageHP;
+            damage.callbackDamaged = onCallbackDamaged;
         }
 
         public virtual int calDamageHP(Unit srcUnit ,Unit targetUnit)
         {
             if(srcUnit == null || targetUnit == null)
                 return 0;
-            return srcUnit.finalAttr.atk - targetUnit.finalAttr.def;
+            return srcUnit.FinalAttr.phyDam - targetUnit.FinalAttr.phyDef;
+        }
+
+        public virtual void onCallbackDamaged(Unit srcUnit, Unit targetUnit)
+        {
+            if (callbackDamaged != null)
+                callbackDamaged(srcUnit, targetUnit);
         }
     }
 }

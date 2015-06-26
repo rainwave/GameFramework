@@ -9,7 +9,7 @@ public class UnitGenerator
         GameObject go = GameObject.Instantiate(Resources.Load("Cube")) as GameObject;
         go.name = "unit";
         Unit unit = go.AddComponent<Unit>();
-        unit.finalAttr = attr;
+        unit.setBaseAttr(attr);
         UnitMng.Instance.addUnit(unit);
         return unit;
     }
@@ -17,9 +17,9 @@ public class UnitGenerator
     public static Unit genUnit<T>(UnitAttr attr) where T : Unit
     {
         GameObject go = GameObject.Instantiate(Resources.Load("Player")) as GameObject;
-        go.name = "unit";
+        go.name = "Player";
         Unit unit = go.AddComponent<T>();
-        unit.finalAttr = attr;
+        unit.setBaseAttr(attr);
         UnitMng.Instance.addUnit(unit);
         return unit;
     }

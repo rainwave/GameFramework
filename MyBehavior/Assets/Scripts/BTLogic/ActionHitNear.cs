@@ -8,7 +8,7 @@ namespace BT
     public class ActionHitNear: BTAction
     {
         Timer timer;
-        int count = 15;
+        int count = 2;
         Unit m_srcUnit = null;
 
         public ActionHitNear()
@@ -28,6 +28,7 @@ namespace BT
         {
             m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
             timer = new Timer();
+            UITownPlayer.simpleShow();
         }
 
         protected override BTResult Excute()

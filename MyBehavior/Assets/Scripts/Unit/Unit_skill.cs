@@ -15,12 +15,12 @@ public partial class Unit : MonoBehaviour
     protected ISkill curSkill = null;
     public void initSkill()
     {
-        SingleMeleeSkill skill = new SingleMeleeSkill();
-        skill.m_srcUnit = this;
-        setSkill(SkillIndex.Normal, skill);
+        //SingleMeleeSkill skill = new SingleMeleeSkill();
+        //skill.m_srcUnit = this;
+        //setSkill(SkillIndex.Normal, skill);
     }
 
-    protected void setSkill(SkillIndex index, ISkill skill)
+    public void setSkill(SkillIndex index, ISkill skill)
     {
         m_skillDict.Add(index, skill);
     }

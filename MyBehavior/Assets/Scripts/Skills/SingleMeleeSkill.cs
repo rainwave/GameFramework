@@ -9,7 +9,7 @@ namespace WTH
 
         public SingleMeleeSkill():base()
         {
-            m_genDamageEveryNorTime = 0.8f;
+            m_genDamageEveryTimeN = 0.8f;
             m_motionName = "hit";
         }
 
@@ -20,13 +20,14 @@ namespace WTH
             IDamage damage = new SingleMeleeDamage(targetUnit);
             damage.m_srcUnit = m_srcUnit ;
             damage.calDamageHPFun = calDamageHP;
+            damage.callbackDamaged = onCallbackDamaged;
         }
 
         public override int calDamageHP(Unit srcUnit, Unit targetUnit)
         {
             if(srcUnit == null || targetUnit == null)
                 return 0;
-            return srcUnit.finalAttr.atk - targetUnit.finalAttr.def;
+            return srcUnit.FinalAttr.phyDam - targetUnit.FinalAttr.phyDef;
         }
     }
 }

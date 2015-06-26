@@ -17,10 +17,12 @@ namespace WTH
         {
             DamageResult result = new DamageResult();
             result.damage = calDamageHPFun(m_srcUnit,m_targetUnit);
+            result.damgeUnit = m_targetUnit;
 
+            m_targetUnit.FinalAttr.curHP -= result.damage;
 
-            m_targetUnit.finalAttr.curHP -= result.damage;
-
+            if (callbackDamaged != null)
+                callbackDamaged(m_srcUnit, m_targetUnit);
             return result;
         }
 

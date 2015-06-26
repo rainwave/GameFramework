@@ -24,6 +24,7 @@ public partial class Unit : MonoBehaviour
         updateHP();
         updateAni();
         updateSkill();
+        updateBuffs();
     }
 }
 
