@@ -14,10 +14,10 @@ public class characterRotate : MonoBehaviour {
 	public GameObject[] gameObjArray=new GameObject[9];
 	public AnimationClip[] AniList  = new AnimationClip[4];
 	
-	float minimum = 2.0f;
-	float maximum = 50.0f;
-	float touchNum = 0f;
-	string touchDirection ="forward"; 
+	//float minimum = 2.0f;
+	//float maximum = 50.0f;
+	//float touchNum = 0f;
+	//string touchDirection ="forward"; 
 	private GameObject Villarger_A_Girl_prefab;
 	
 	// Use this for initialization

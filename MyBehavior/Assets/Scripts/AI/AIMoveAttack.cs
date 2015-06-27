@@ -17,13 +17,18 @@ namespace WTH
             base.enter();
 
             BTSequence sequece = new BTSequence();
+            BTParallelFlexible para = new BTParallelFlexible();
             BTAction sayHello = new ActionSayHello();
             BTAction run = new ActionRun();
             BTAction hitNear = new ActionHitNear();
+
             sequece.addChild(sayHello);
             sequece.addChild(run);
-            sequece.addChild(hitNear);
-            this.addBTChild(sequece);
+
+            para.addChild(sequece);
+            para.addChild(hitNear);
+
+            this.addBTChild(para);
         }
 
 

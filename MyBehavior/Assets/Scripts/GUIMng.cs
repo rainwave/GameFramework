@@ -5,11 +5,11 @@ using BT;
 public class GUIMng : MonoSingleton<GUIMng> {
 
 	// Use this for initialization
-	void Start () {
+    protected override 	void Start () {
 	
 	}
 
-	void OnGUI()
+    protected void OnGUI()
 	{
 		if(GUI.Button(new Rect(10,10,100,100),"Click Me"))
 		{
@@ -20,7 +20,8 @@ public class GUIMng : MonoSingleton<GUIMng> {
 	}
 
 	// Update is called once per frame
-	void Update () {
+    protected override void Update()
+    {
 	
 	}
 

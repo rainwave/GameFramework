@@ -6,6 +6,7 @@ using WTH;
 
 public partial class Unit : MonoBehaviour
 {
+    public string LogCurNode = "";
 
     protected AI ai;
 
@@ -25,6 +26,8 @@ public partial class Unit : MonoBehaviour
     protected void updateBT()
     {
         ai.update();
+        if(!string.IsNullOrEmpty( Global.LogCurNode))
+            LogCurNode = Global.LogCurNode;
 	}
 
     public void addBTChild(BTNode child)

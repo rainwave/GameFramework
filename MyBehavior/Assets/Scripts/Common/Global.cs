@@ -14,9 +14,11 @@ public class Global
 
     public static bool v3Near(Vector3 a,Vector3 b)
     {
-        if (v3SqrDis(a, b) < 0.5f)
+        if (v3SqrDis(a, b) < 5.0f)
             return true;
         return false;
     }
+
+    public static string LogCurNode = "";
 }
 

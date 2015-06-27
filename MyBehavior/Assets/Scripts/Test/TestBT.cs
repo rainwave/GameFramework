@@ -24,7 +24,7 @@ class TestBT : MonoBehaviour
 
         UnitGenerator.genUnit(attr1);
         Unit player = UnitGenerator.genUnit<UnitPlayer>(attr2);
-        player.m_cacheTransform.localPosition = new Vector3(5, 0, 0);
+        player.m_cacheTransform.localPosition = new Vector3(10, 0, 10);
 
         SingleMeleeSkill skill = new SingleMeleeSkill();
         skill.m_srcUnit = player;

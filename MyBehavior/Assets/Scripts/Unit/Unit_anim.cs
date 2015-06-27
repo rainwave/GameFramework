@@ -28,9 +28,9 @@ public partial class Unit : MonoBehaviour
         run.nameHash = Animator.StringToHash("Base Layer.run");
 
         AniInfo hit = new AniInfo();
-        run.name = "hit";
-        run.action = 9;
-        run.nameHash = Animator.StringToHash("Base Layer.skill1");
+        hit.name = "hit";
+        hit.action = 9;
+        hit.nameHash = Animator.StringToHash("Base Layer.skill1");
 
         m_aniInfoes.Add(run);
         m_aniInfoes.Add(hit);
@@ -66,7 +66,7 @@ public partial class Unit : MonoBehaviour
         {
             if (info.normalizedTime > m_curAniInfo.exitNorTime)
             {
-                m_animator.SetInteger("action", 0);
+                //m_animator.SetInteger("action", 0);
             }
         }
         

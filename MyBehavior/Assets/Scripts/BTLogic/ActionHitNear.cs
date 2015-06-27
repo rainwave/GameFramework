@@ -10,6 +10,8 @@ namespace BT
         Timer timer;
         int count = 2;
         Unit m_srcUnit = null;
+        Unit m_targetUnit = null;
+        protected float hitDis = 3.0f;
 
         public ActionHitNear()
         {
@@ -18,10 +20,16 @@ namespace BT
 
         protected override bool DoEvaluate()
         {
-            if (count > 0)
-                return true;
-            else
+            if (m_srcUnit == null)
+                m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
+            if (m_targetUnit == null)
+                m_targetUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
+            if (m_targetUnit == null)
                 return false;
+            if (Global.v3SqrDis(m_targetUnit.m_cacheTransform.localPosition, m_srcUnit.m_cacheTransform.localPosition) < hitDis * hitDis)
+                return true;
+
+            return false;
         }
 
         protected override void Enter()

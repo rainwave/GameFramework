@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 namespace BT
 {
-	
+    // 顺序 构造函数 -> active -> doActived -> Evaluate -> doEvaluate -> Tick -> enter -> excute -> exit
 	public abstract class BTAction : BTNode {
         protected BTActionStatus m_actionStatus = BTActionStatus.Ready;
 

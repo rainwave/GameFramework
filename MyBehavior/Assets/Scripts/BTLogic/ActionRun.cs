@@ -8,7 +8,9 @@ namespace BT
     public class ActionRun: BTAction
     {
         Unit m_srcUnit = null;
-        Vector3 m_targetPos = Vector3.zero;
+        Unit m_targetUnit = null;
+        protected float disMax = 50f;    // 视野范围
+        protected float disMin = 2f;     // 最近距离
 
         public ActionRun()
         {
@@ -17,41 +19,39 @@ namespace BT
 
         protected override bool DoEvaluate()
         {
-            return true;
+            if (m_srcUnit == null)
+                m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
+            if (m_targetUnit == null)
+                m_targetUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
+            if (m_targetUnit == null)
+                return false;
+            if (Global.v3SqrDis(m_targetUnit.m_cacheTransform.localPosition, m_srcUnit.m_cacheTransform.localPosition) < disMax * disMax)
+                return true;
+
+            return false;
         }
 
         protected override void Enter()
         {
-            m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
-            Unit nearUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
-            if (nearUnit != null)
-                m_targetPos = nearUnit.m_cacheTransform.localPosition;
+            if(m_srcUnit == null)
+                m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
         }
 
         protected override BTResult Excute()
         {
-            Debug.Log("m_targetPos " + m_targetPos);
+            if (m_srcUnit.isNaving)
+                return BTResult.Running;
+            if(m_targetUnit == null)
+                m_targetUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
+            if (m_targetUnit == null)
+               return  BTResult.Ended;
 
-            runToTarget(m_srcUnit.m_cacheTransform, m_targetPos, 0.5f);
+            m_srcUnit.moveTo(m_targetUnit.m_cacheTransform.localPosition);
+            m_srcUnit.changeMotion("run");
 
-            if (Global.v3Near(m_srcUnit.m_cacheTransform.localPosition, m_targetPos))
+            if (Global.v3SqrDis(m_srcUnit.m_cacheTransform.localPosition, m_targetUnit.m_cacheTransform.localPosition) < disMin*disMin)
                 return BTResult.Ended;
             return BTResult.Running;
-        }
-
-        protected void faceToTarget(Transform transform, Vector3 targetPos)
-        {
-            Vector3 dir = targetPos - transform.localPosition;
-            transform.forward = dir;
-        }
-
-        protected void runToTarget(Transform transform, Vector3 targetPos,float disEveryTime)
-        {
-            //faceToTarget(m_srcUnit.m_cacheTransform, m_targetPos);
-            //transform.localPosition += transform.forward * disEveryTime;
-            Vector3 dir = targetPos - transform.localPosition;
-            transform.Translate(dir * disEveryTime);
-            transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
         }
 
         protected override void Exit()

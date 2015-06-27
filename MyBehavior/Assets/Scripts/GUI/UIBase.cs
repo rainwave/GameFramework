@@ -1,8 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace WTH
 {
+    public enum UIType
+    {
+        None = 0,
+        Main = 1,
+        Left = 2,
+        Right = 3
+    }
     public class UICommonData
     {
         public static GameObject curMainUI;
@@ -22,14 +30,7 @@ namespace WTH
                 return _uiName;
             }
         }
-        public enum UIType
-        {
-            None = 0,
-            Main = 1,
-            Left = 2,
-            Right= 3
-        }
-
+        
         public UIType uiType;
 
         // ==========================================
@@ -75,25 +76,31 @@ namespace WTH
                     return;
                 }
                 GameObject go = GameObject.Instantiate(res) as GameObject;
-                if (go == null)
+                if (go == null || _instance == null)
                 {
                     Debug.LogError(string.Format("Init UI {0} fail", UIName));
                     return;
                 }
-
+            }
+            // Awake has be active when instantite _instan not null
+            UIBase<T> baseUI = (UIBase<T>)(object)_instance;
+            if(baseUI.uiType == UIType.Main)
+            {
                 if (UICommonData.curMainUI != null && !UICommonData.curMainUI.Equals(null))
                 {
                     UICommonData.curMainUI.gameObject.SetActive(false);
-                }
-                UICommonData.curMainUI = go;
 
-                go.name = UIName;
-                Transform transform = go.transform;
-                transform.parent = Main.Instance.uiRoot;
-                transform.localPosition = Vector3.zero;
-                transform.localRotation = Quaternion.identity;
-                transform.localScale = Vector3.one;
+                }
+                UICommonData.curMainUI = baseUI.gameObject;
             }
+
+            baseUI.gameObject.SetActive(true);
+            baseUI.gameObject.name = UIName;
+            baseUI.cachedTransform = baseUI.gameObject.transform;
+            baseUI.cachedTransform.parent = Main.Instance.uiRoot;
+            baseUI.cachedTransform.localPosition = Vector3.zero;
+            baseUI.cachedTransform.localRotation = Quaternion.identity;
+            baseUI.cachedTransform.localScale = Vector3.one;
         }
 
         public void hide()
@@ -111,7 +118,7 @@ namespace WTH
             if(gameObject != null)
                 gameObject.SetActive(true);
 
-            if (UICommonData.curMainUI != null && !UICommonData.curMainUI.Equals(null))
+            if (uiType == UIType.Main && UICommonData.curMainUI != null && !UICommonData.curMainUI.Equals(null))
             {
                 UICommonData.curMainUI.gameObject.SetActive(false);
             }

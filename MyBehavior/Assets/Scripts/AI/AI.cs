@@ -67,6 +67,8 @@ namespace WTH
             if (!m_isRunning)
                 return;
 
+            logClear();
+
             if (m_blackboard.GetData<bool>(RESET))
             {
                 reset();
@@ -75,6 +77,7 @@ namespace WTH
 
             if (root.Evaluate())
                 root.Tick();
+
         }
 
         public void reset()
@@ -98,6 +101,11 @@ namespace WTH
         public virtual void exit()
         {
             reset();
+        }
+
+        protected void logClear()
+        {
+            Global.LogCurNode = "";
         }
     }
 }

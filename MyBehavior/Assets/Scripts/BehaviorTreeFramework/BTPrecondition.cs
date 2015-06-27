@@ -7,8 +7,6 @@ namespace BT
     // 一种是 执行行为节点前，这个行为节点还需要一些外部的条件，这个条件可以传入行为节点的构造器中
 	public abstract class BTPrecondition : BTNode {
 
-		public string m_Name;
-
         // 条件节点特有的,给其他节点做为外部条件判断的，构造器中传入的节点就要用这个判断,不挂在树上
 		public virtual bool check()
 		{

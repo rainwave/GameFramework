@@ -8,13 +8,13 @@ namespace BT
         Running,
         Ended
     }
-
+    // 顺序 构造函数 -> active -> doActived -> Evaluate -> doEvaluate -> Tick
 	public abstract class BTNode {
 
 		public string m_Name;
 
 		protected List<BTNode> m_children = new List<BTNode> ();
-
+        // 外部条件 可以自定义不同类型的条件，方便拓展
 		protected BTPrecondition m_precondition;
 
         // 是否被激活，激活时为当前选中节点,可以执行tick循环了.
@@ -57,17 +57,28 @@ namespace BT
 
             this.m_blackboard = blackboard;
             m_actived = true;
+
+            doActived();
+        }
+        
+        // 激活结束后
+        protected virtual void doActived()
+        { 
+            
         }
 
         public bool Evaluate()
 		{
 			bool coolDownOK = checkTimer ();
 
-            return coolDownOK && (m_precondition == null || m_precondition.check()) && DoEvaluate();
+            bool isOK = coolDownOK && (m_precondition == null || m_precondition.check()) && DoEvaluate();
+            if (isOK)
+                Global.LogCurNode += string.Format("---{0}\n", this.GetType());
+            return isOK;
 		}
 
         /// <summary>
-        /// 子类自定义执行条件
+        /// 子类自定义执行条件 --内部条件/ 固定条件
         /// 例如：评估子节点有否满足自身条件的
         /// </summary>
 		protected virtual bool DoEvaluate()
