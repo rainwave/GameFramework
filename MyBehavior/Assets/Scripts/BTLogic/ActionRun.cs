@@ -21,7 +21,7 @@ namespace BT
         {
             if (m_srcUnit == null)
                 m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
-            if (m_targetUnit == null)
+            if (m_targetUnit == null || m_targetUnit.isDie)
                 m_targetUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
             if (m_targetUnit == null)
                 return false;
@@ -41,7 +41,7 @@ namespace BT
         {
             if (m_srcUnit.isNaving)
                 return BTResult.Running;
-            if(m_targetUnit == null)
+            if (m_targetUnit == null || m_targetUnit.isDie)
                 m_targetUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
             if (m_targetUnit == null)
                return  BTResult.Ended;

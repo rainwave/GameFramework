@@ -55,6 +55,18 @@ public partial class Unit : MonoBehaviour
         m_animator.SetInteger("action", m_curAniInfo.action);
     }
 
+    public int getMotionHash(string animName)
+    {
+        foreach (AniInfo aniInfo in m_aniInfoes)
+        {
+            if (aniInfo.name == animName)
+            {
+                return aniInfo.nameHash;
+            }
+        }
+        return 0;
+    }
+
     protected void updateAni()
     {
         if (m_animator == null || m_curAniInfo == null)
@@ -66,7 +78,7 @@ public partial class Unit : MonoBehaviour
         {
             if (info.normalizedTime > m_curAniInfo.exitNorTime)
             {
-                //m_animator.SetInteger("action", 0);
+                m_animator.SetInteger("action", 0);
             }
         }
         

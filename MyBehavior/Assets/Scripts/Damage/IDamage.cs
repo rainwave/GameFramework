@@ -38,20 +38,27 @@ namespace WTH
             get
             {
                 float dis = m_timeElaspe * m_flySpeed;
-                dis = m_maxDis > 0 && dis > m_maxDis ? m_maxDis : dis;
+                dis = dis > m_maxDis ? m_maxDis : dis;
                 return m_startPos + m_dir.normalized * dis;
             }
         }
         // 伤害半径 9999999f 为全图(主要为buff技能)
         public float m_radius = 9999999f;
+        public float CurRadius
+        {
+            get
+            {
+                return m_radius;
+            }
+        }
 
         public Unit m_srcUnit;
 
         public delegate int CalDamageHPFun(Unit srcUnit, Unit targetUnit);
-        public CalDamageHPFun calDamageHPFun;
+        public CalDamageHPFun m_calDamageHPFun;
 
         public delegate void CallbackDamaged(Unit srcUnit, Unit targetUnit);
-        public CallbackDamaged callbackDamaged;
+        public CallbackDamaged m_callbackDamaged;
 
         public IDamage()
         {
@@ -59,7 +66,7 @@ namespace WTH
         }
 
 
-        public virtual DamageResult generateDamageResult()
+        protected virtual DamageResult generateDamageResult(Unit targetUnit)
         {
            
             return null;
@@ -70,6 +77,17 @@ namespace WTH
             m_timeElaspe += deltaTime;
             DamageResultSet resultSet = new DamageResultSet();
             return resultSet;
+        }
+
+        // 伤害统一
+        protected int calDamageHP(Unit srcUnit, Unit targetUnit)
+        {
+            int hpChange = 0;
+            //if (calDamageHPFun != null)
+            //    hpChange += calDamageHPFun(srcUnit, targetUnit);
+            hpChange = srcUnit.FinalAttr.phyDam - targetUnit.FinalAttr.phyDef;
+            hpChange = Mathf.Max(1, hpChange);
+            return hpChange;
         }
     }
 }

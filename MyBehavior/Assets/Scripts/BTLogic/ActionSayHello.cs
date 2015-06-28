@@ -21,7 +21,7 @@ namespace BT
         protected override void Enter()
         {
             timer = new Timer();
-            UITownMain.simpleShow();
+            //UITownMain.simpleShow();
         }
 
         protected override BTResult Excute()

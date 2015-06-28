@@ -28,6 +28,8 @@ public class UnitMng : MonoSingleton<UnitMng>
         Unit targetUnit = null;
         for (int i = 0, len = m_units.Count; i < len; i++)
         {
+            if (m_units[i].isDie)
+                continue;
             if (m_units[i].Equals(srcUnit))
                 continue;
             float dis = Global.v3SqrDis(srcUnit.m_cacheTransform.localPosition, m_units[i].m_cacheTransform.localPosition);
@@ -39,6 +41,26 @@ public class UnitMng : MonoSingleton<UnitMng>
         }
 
         return targetUnit;
+    }
+
+    public List<Unit> collectUnitsByCircle(Vector3 center, float radius,CampSet srcCamp,int filterCamp)
+    {
+        List<Unit> units = new List<Unit>();
+        for (int i = 0, len = m_units.Count; i < len; i++)
+        {
+            if (m_units[i].isDie)
+                continue;
+            if (Global.v3SqrDis(center, m_units[i].m_cacheTransform.localPosition)
+                < (radius + m_units[i].m_radius) * (radius + m_units[i].m_radius))
+            {
+                if (((int)m_units[i].m_campSet & filterCamp) > 0)
+                    continue;
+                    
+                units.Add(m_units[i]);
+            }
+        }
+
+        return units;
     }
 
 }

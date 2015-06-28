@@ -22,7 +22,7 @@ namespace BT
         {
             if (m_srcUnit == null)
                 m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
-            if (m_targetUnit == null)
+            if (m_targetUnit == null || m_targetUnit.isDie)
                 m_targetUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
             if (m_targetUnit == null)
                 return false;
@@ -35,8 +35,8 @@ namespace BT
         protected override void Enter()
         {
             m_srcUnit = m_blackboard.GetData<Unit>("SrcUnit");
-            timer = new Timer();
-            UITownPlayer.simpleShow();
+            timer = new Timer(2.0f);
+            //UITownPlayer.simpleShow();
         }
 
         protected override BTResult Excute()

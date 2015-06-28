@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace WTH
 {
+    // 单体近战技能
     public class SingleMeleeSkill: ISkill
     {
 
@@ -19,15 +20,8 @@ namespace WTH
             Unit targetUnit = UnitMng.Instance.collectNearUnit(m_srcUnit);
             IDamage damage = new SingleMeleeDamage(targetUnit);
             damage.m_srcUnit = m_srcUnit ;
-            damage.calDamageHPFun = calDamageHP;
-            damage.callbackDamaged = onCallbackDamaged;
+            damage.m_callbackDamaged = onCallbackDamaged;
         }
 
-        public override int calDamageHP(Unit srcUnit, Unit targetUnit)
-        {
-            if(srcUnit == null || targetUnit == null)
-                return 0;
-            return srcUnit.FinalAttr.phyDam - targetUnit.FinalAttr.phyDef;
-        }
     }
 }

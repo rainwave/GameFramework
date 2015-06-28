@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 namespace WTH
 {
@@ -13,26 +13,27 @@ namespace WTH
             m_targetUnit = targetUnit;
         }
 
-        public override DamageResult generateDamageResult()
+        protected override DamageResult generateDamageResult(Unit targetUnit)
         {
             DamageResult result = new DamageResult();
-            result.damage = calDamageHPFun(m_srcUnit,m_targetUnit);
-            result.damgeUnit = m_targetUnit;
+            result.damage = calDamageHP(m_srcUnit, targetUnit);
+            result.damgeUnit = targetUnit;
 
-            m_targetUnit.FinalAttr.curHP -= result.damage;
+            targetUnit.FinalAttr.curHP -= result.damage;
 
-            if (callbackDamaged != null)
-                callbackDamaged(m_srcUnit, m_targetUnit);
+            if (m_callbackDamaged != null)
+                m_callbackDamaged(m_srcUnit, targetUnit);
             return result;
         }
 
         public override DamageResultSet updateDamage(float deltaTime)
         {
             DamageResultSet resultSet = base.updateDamage(deltaTime);
-            resultSet.m_listResult.Add(generateDamageResult());
+            resultSet.m_listResult.Add(generateDamageResult(m_targetUnit));
 
             resultSet.isFinish = true;
             return resultSet;
         }
+
     }
 }

@@ -25,6 +25,14 @@ public class UnitAttr
     }
 }
 
+public enum CampSet
+{ 
+    None = 0x00,
+    People1 = 0x01,
+    People2 = 0x02,
+    Monster = 0x04,
+}
+
 public partial class Unit : MonoBehaviour
 {
     protected bool isAttrChange = true;
@@ -88,7 +96,12 @@ public partial class Unit : MonoBehaviour
                 mat.color = Color.green;
             }
         }
+    }
 
+    public CampSet m_campSet;
+    public bool isDie
+    {
+        get { return FinalAttr.curHP <= 0 ? true : false; }
     }
 }
 
